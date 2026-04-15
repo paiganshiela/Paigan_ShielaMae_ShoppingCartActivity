@@ -36,7 +36,7 @@ class Program
         products[7] = new Product { Id = 8, Name = "Highlighter", Price = 160, Stock = 10 };
         products[8] = new Product { Id = 9, Name = "Blush on", Price = 200, Stock = 30 };
         products[9] = new Product { Id = 10, Name = "Pressed Powder", Price = 600, Stock = 20 };
-       
+
 
         CartItem[] cart = new CartItem[10];
         int cartCount = 0;
@@ -50,7 +50,7 @@ class Program
             {
                 products[i].Display();
             }
-            Console.WriteLine("11. Exit");
+            Console.WriteLine("0. Exit");
 
             Console.Write("Enter product number: ");
             int choice;
@@ -69,7 +69,30 @@ class Program
             if (choice < 1 || choice > products.Length)
             {
                 Console.WriteLine("Invalid product.");
+                continue;
+            }
 
+            Product selected = products[choice - 1];
+
+            if (selected.Stock == 0)
+            {
+                Console.WriteLine("Out of stock.");
+                continue;
+            }
+
+            Console.Write("Enter quantity: ");
+            int qty;
+
+            if (!int.TryParse(Console.ReadLine(), out qty) || qty <= 0)
+            {
+                Console.WriteLine("Invalid quantity.");
+                continue;
+            }
+
+            if (qty > selected.Stock)
+            {
+                Console.WriteLine("Not enough stock.");
+                continue;
             }
         }
     }
