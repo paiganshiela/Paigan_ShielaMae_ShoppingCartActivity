@@ -50,7 +50,8 @@ class Program
             {
                 products[i].Display();
             }
-            Console.WriteLine("0. Exit");
+            Console.WriteLine("11. Exit");
+            Console.WriteLine();
 
             Console.Write("Enter product number: ");
             int choice;
@@ -61,14 +62,14 @@ class Program
                 continue;
             }
 
-            if (choice == 0)
+            if (choice == 11)
             {
                 break;
             }
 
             if (choice < 1 || choice > products.Length)
             {
-                Console.WriteLine("Invalid product.");
+                Console.WriteLine("Invalid product");
                 continue;
             }
 
@@ -76,7 +77,7 @@ class Program
 
             if (selected.Stock == 0)
             {
-                Console.WriteLine("Out of stock.");
+                Console.WriteLine("Out of stock");
                 continue;
             }
 
@@ -85,15 +86,62 @@ class Program
 
             if (!int.TryParse(Console.ReadLine(), out qty) || qty <= 0)
             {
-                Console.WriteLine("Invalid quantity.");
+                Console.WriteLine("Invalid quantity");
                 continue;
             }
 
             if (qty > selected.Stock)
             {
-                Console.WriteLine("Not enough stock.");
+                Console.WriteLine("Not enough stock");
                 continue;
             }
+
+            double itemTotal = selected.Price * qty;
+            total += itemTotal;
+            selected.Stock -= qty;
+
+            cart[cartCount] = new CartItem
+            {
+                Product = selected,
+                Quantity = qty
+            };
+
+            cartCount++;
+
+            Console.WriteLine("Added to cart!");
+            Console.WriteLine("Subtotal: " + itemTotal);
+
+            Console.Write("Add more? (N/Y): ");
+            string ans = Console.ReadLine();
+            Console.WriteLine();
+
+            if (ans.ToUpper() == "N")
+                break;
+        }
+        {
+            Console.WriteLine();
+        }
+
+        Console.WriteLine("+==== TOTAL ====+");
+        Console.WriteLine("Grand Total: " + total);
+
+        if (total >= 5000)
+        {
+            double discount = total * 0.10;
+            double finalTotal = total - discount;
+
+            Console.WriteLine("Discount: " + discount);
+            Console.WriteLine("Final Total: " + finalTotal);
+        }
+        {
+            Console.WriteLine();
+        }
+
+
+        Console.WriteLine("+=== REMAINING STOCK ===+");
+        for (int i = 0; i < products.Length; i++)
+        {
+            Console.WriteLine(products[i].Name + ": " + products[i].Stock);
         }
     }
 }
