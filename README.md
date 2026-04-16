@@ -1,5 +1,6 @@
 Shopping Cart System
-This is a console-based Shopping Cart System written in C#, submitted as a quiz requirement for the Computer Programming 2 course.”
+
+This is a console-based Shopping Cart System written in C#, submitted as a quiz requirement for the Computer Programming 2 course.
 
 AI Usage
 
