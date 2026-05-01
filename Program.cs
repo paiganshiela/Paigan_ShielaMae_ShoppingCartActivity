@@ -38,8 +38,7 @@ class Program
 
         double total = 0;
 
-        while (true)
-        {
+ 
             while (true)
             {
                 Console.WriteLine("\n=== MENU ===");
@@ -53,7 +52,85 @@ class Program
                 Console.Write("Choice: ");
                 int choice = int.Parse(Console.ReadLine());
 
+                if (choice == 1)
+                {
+                    foreach (var p in products)
+                        Console.WriteLine($"{p.Id}. {p.Name} - {p.Price} (Stock: {p.Stock})");
+
+                    Console.Write("Enter product ID: ");
+                    int id = int.Parse(Console.ReadLine());
+
+                    Product selected = products[id - 1];
+
+                    Console.Write("Quantity: ");
+                    int qty = int.Parse(Console.ReadLine());
+
+                    if (qty <= selected.Stock)
+                    {
+                        cart[cartCount++] = new CartItem { Product = selected, Quantity = qty };
+                        selected.Stock -= qty;
+                        total += selected.Price * qty;
+                        Console.WriteLine("Item Added!");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Sorry, not enough stock");
+                    }
+                }
+
+                else if (choice == 2)
+                {
+                    Console.Write("Search product name: ");
+                    string key = Console.ReadLine().ToLower();
+
+                    bool found = false;
+
+                    foreach (var p in products)
+                    {
+                        if (p.Name.ToLower().Contains(key))
+                        {
+                            Console.WriteLine($"{p.Name} - PHP {p.Price} (Stock: {p.Stock})");
+                            found = true;
+                        }
+                    }
+
+                    if (!found)
+                    {
+                        Console.WriteLine("No product found");
+                    }
+                }
+            
+
+                    else if (choice == 3)
+                {
+                    Console.Write("Product Category: ");
+                    string cat = Console.ReadLine();
+
+                    foreach (var p in products)
+                        if (p.Category.ToLower() == cat.ToLower())
+                            Console.WriteLine(p.Name);
+                }
+
+                else if (choice == 4)
+                {
+                    Console.WriteLine("\n---CART---/:");
+                    for (int i = 0; i < cartCount; i++)
+                    {
+                        Console.WriteLine($"{cart[i].Product.Name} x{cart[i].Quantity}");
+                    }
+                }
+
+                else if (choice == 5)
+                {
+                    double discount = 0;
+                    if (total >= 5000)
+                        discount = total * 0.10;
+
+                    double finalTotal = total - discount;
+
+                    Console.WriteLine("Final Total: " + finalTotal);
+
+                }
             }
         }
     }
-}
