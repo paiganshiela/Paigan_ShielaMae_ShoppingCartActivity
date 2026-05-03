@@ -41,7 +41,7 @@ class Program
 
         while (true)
         {
-            Console.WriteLine("\n=== MENU ===");
+            Console.WriteLine("*=======MENU=======*");
             Console.WriteLine("1. View Products");
             Console.WriteLine("2. Search");
             Console.WriteLine("3. Product Category");
@@ -54,29 +54,50 @@ class Program
 
             if (choice == 1)
             {
-                foreach (var p in products)
-                    Console.WriteLine($"{p.Id}. {p.Name} - {p.Price} (Stock: {p.Stock})");
-
-                Console.Write("Enter product ID: ");
-                int id = int.Parse(Console.ReadLine());
-
-                Product selected = products[id - 1];
-
-                Console.Write("Quantity: ");
-                int qty = int.Parse(Console.ReadLine());
-
-                if (qty <= selected.Stock)
+                while (true)
                 {
-                    cart[cartCount++] = new CartItem { Product = selected, Quantity = qty };
-                    selected.Stock -= qty;
-                    total += selected.Price * qty;
-                    Console.WriteLine("Item Added!");
-                }
-                else
-                {
-                    Console.WriteLine("Sorry, not enough stock");
+                    foreach (var p in products)
+                        Console.WriteLine($"{p.Id}. {p.Name} - {p.Price} (Stock: {p.Stock})");
+
+                    Console.Write("Enter product ID: ");
+                    int id = int.Parse(Console.ReadLine());
+
+                    Product selected = products[id - 1];
+
+                    Console.Write("Quantity: ");
+                    int qty = int.Parse(Console.ReadLine());
+
+                    if (qty <= selected.Stock)
+                    {
+                        cart[cartCount++] = new CartItem { Product = selected, Quantity = qty };
+                        selected.Stock -= qty;
+                        total += selected.Price * qty;
+
+                        Console.WriteLine("Item Added!");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Sorry, not enough stock");
+                    }
+
+                    
+                    string ans;
+                    while (true)
+                    {
+                        Console.Write("Add another item? (Y/N): ");
+                        ans = Console.ReadLine().ToUpper();
+
+                        if (ans == "Y" || ans == "N")
+                            break;
+
+                        Console.WriteLine("Invalid input. Please enter Y or N only.");
+                    }
+
+                    if (ans == "N")
+                        break;
                 }
             }
+
 
             else if (choice == 2)
             {
@@ -115,7 +136,7 @@ class Program
             {
                 while (true)
                 {
-                    Console.WriteLine("\n=== CART MENU ===");
+                    Console.WriteLine("+=======CART MENU=======+");
                     Console.WriteLine("1. View Cart");
                     Console.WriteLine("2. Remove Item");
                     Console.WriteLine("3. Update Quantity");
@@ -123,19 +144,19 @@ class Program
                     Console.WriteLine("5. Checkout");
                     Console.WriteLine("6. Back");
 
-                    Console.Write("Choice: ");
+                    Console.Write("Enter Choice: ");
                     int cartChoice = int.Parse(Console.ReadLine());
 
                     if (cartChoice == 1)
                     {
-                        Console.WriteLine("\n--- CART ---");
+                        Console.WriteLine("+=======CART=======+");
                         for (int i = 0; i < cartCount; i++)
                         {
-                            Console.WriteLine($"{i + 1}. {cart[i].Product.Name} x{cart[i].Quantity}");
+                            Console.WriteLine($"{i + 1}. (ID:{cart[i].Product.Id}) {cart[i].Product.Name} x{cart[i].Quantity}");
                         }
 
                         if (cartCount == 0)
-                            Console.WriteLine("Cart is empty.");
+                            Console.WriteLine("Cart is empty");
                     }
 
                     else if (cartChoice == 2)
@@ -145,17 +166,17 @@ class Program
 
                         if (index >= 0 && index < cartCount)
                         {
-                            cart[index].Product.Stock += cart[index].Quantity; // return stock
+                            cart[index].Product.Stock += cart[index].Quantity;
                             total -= cart[index].Product.Price * cart[index].Quantity;
 
                             cart[index] = cart[cartCount - 1];
                             cartCount--;
 
-                            Console.WriteLine("Item removed.");
+                            Console.WriteLine("Item removed");
                         }
                         else
                         {
-                            Console.WriteLine("Invalid item.");
+                            Console.WriteLine("Invalid item");
                         }
                     }
 
@@ -178,7 +199,7 @@ class Program
 
                                 if (diff > 0 && diff > cart[i].Product.Stock)
                                 {
-                                    Console.WriteLine("Not enough stock.");
+                                    Console.WriteLine("Not enough stock");
                                 }
                                 else
                                 {
@@ -186,7 +207,7 @@ class Program
                                     cart[i].Quantity = newQty;
                                     total += cart[i].Product.Price * diff;
 
-                                    Console.WriteLine("Quantity updated.");
+                                    Console.WriteLine("Quantity updated!");
                                 }
 
                                 found = true;
@@ -196,7 +217,7 @@ class Program
 
                         if (!found)
                         {
-                            Console.WriteLine("Item not found in cart.");
+                            Console.WriteLine("Item not found in cart");
                         }
                     }
 
@@ -211,7 +232,7 @@ class Program
                         cartCount = 0;
                         total = 0;
 
-                        Console.WriteLine("Cart cleared.");
+                        Console.WriteLine("Cart cleared");
                     }
 
                     else if (cartChoice == 5)
@@ -238,7 +259,7 @@ class Program
 
                         double change = payment - finalTotal;
 
-                        Console.WriteLine("\n--- RECEIPT ---");
+                        Console.WriteLine("+====RECEIPT====+");
                         Console.WriteLine("Date: " + DateTime.Now);
                         Console.WriteLine("Total: " + total);
                         Console.WriteLine("Discount: " + discount);
