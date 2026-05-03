@@ -14,5 +14,32 @@ Question that I asked/Prompts:
 - Can I have a sample codes for computing the remaining stock?
 - Is there any error in my code?
 - How to make a flowchart?
-- What does each shapes represent? 
+- What does each shapes represent?
+
+PART 2 SHOPPING CART SYSTEM 
+AI USAGE: I used it as a guide to understand some parts, but I wrote and 
+modified the code myself. I asked for several codes to add or fix any of the logic 
+I have inside my program. I asked help for the errors I found hard to fix, it gave 
+me codes and I pasted it but I made sure to know the function of every code 
+that has given and to understand it. Some of the requirements are hard for me 
+to, I do not know what code I should type to supply a certain requirement and I 
+asked an AI for help, but I made sure to understand and interpret each part of the code 
+myself. 
+
+Questions that I asked/Prompts: 
+• what classes I need, help me create classes for Product, CartItem, and maybe Order? 
+• How to structure CartItem class that connects a product with quantity? 
+• (pasted a code) what is wrong with my code, why is it not applying the discount for the 
+item I purchased? 
+• How to store past transactions. Can you help me make an Order class with receipt 
+number and final total? 
+• I’m confused how to store items added to the cart using arrays. Can you help me create 
+and manage a CartItem array? 
+• How do I properly display cart items so that it shows the index, product ID, name, and 
+quantity all in one line?” 
+• What are the codes I must include for an order history? 
+• What does “var p” means and its function? 
+• I want to search products even if the user types partial words. How do I check if a 
+product name contains the search key in a case-insensitive way? 
+• How to add a rceipt?
 
