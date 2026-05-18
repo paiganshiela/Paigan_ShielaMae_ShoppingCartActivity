@@ -2,23 +2,77 @@
 
 class Product
 {
-    public int Id;
-    public string Name;
-    public double Price;
-    public int Stock;
-    public string Category;
+    private int id;
+    private string name;
+    private double price;
+    private int stock;
+    private string category;
+
+    public int Id
+    {
+        get { return id; }
+        set { id = value; }
+    }
+
+    public string Name
+    {
+        get { return name; }
+        set { name = value; }
+    }
+
+    public double Price
+    {
+        get { return price; }
+        set { price = value; }
+    }
+
+    public int Stock
+    {
+        get { return stock; }
+        set { stock = value; }
+    }
+
+    public string Category
+    {
+        get { return category; }
+        set { category = value; }
+    }
 }
 
 class CartItem
 {
-    public Product Product;
-    public int Quantity;
+    private Product product;
+    private int quantity;
+
+    public Product Product
+    {
+        get { return product; }
+        set { product = value; }
+    }
+
+    public int Quantity
+    {
+        get { return quantity; }
+        set { quantity = value; }
+    }
 }
 
 class Order
 {
-    public int ReceiptNumber;
-    public double FinalTotal;
+    private int receiptNumber;
+    private double finalTotal;
+
+    public int ReceiptNumber
+    {
+        get { return receiptNumber; }
+        set { receiptNumber = value; }
+    }
+
+    public double FinalTotal
+    {
+        get { return finalTotal; }
+        set { finalTotal = value; }
+    }
 }
 
 class Program
@@ -144,6 +198,7 @@ class Program
                         {
                             Console.WriteLine($"{i + 1}. (ID:{cart[i].Product.Id}) {cart[i].Product.Name} x{cart[i].Quantity}");
                         }
+
                         if (cartCount == 0)
                             Console.WriteLine("Cart is empty");
                     }
@@ -231,6 +286,7 @@ class Program
                         }
 
                         double payment;
+
                         while (true)
                         {
                             Console.Write("\nEnter payment: ");
